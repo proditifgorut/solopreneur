@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Mail, Phone, MapPin, Send, Linkedin, Github, Twitter } from 'lucide-react';
 
 const Contact: React.FC = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,19 +28,19 @@ const Contact: React.FC = () => {
   const contactInfo = [
     {
       icon: Mail,
-      label: 'Email',
+      label: t('contact.email'),
       value: 'halo@hardirstm.dev',
       href: 'mailto:halo@hardirstm.dev',
     },
     {
       icon: Phone,
-      label: 'Telepon',
+      label: t('contact.phone'),
       value: '+62 812-3456-7890',
       href: 'tel:+628123456789',
     },
     {
       icon: MapPin,
-      label: 'Lokasi',
+      label: t('contact.location'),
       value: 'Jakarta, Indonesia',
       href: null,
     },
@@ -61,11 +63,11 @@ const Contact: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Hubungi <span className="text-gradient">Saya</span>
+            {t('contact.title_part1')} <span className="text-gradient">{t('contact.title_part2')}</span>
           </h2>
           <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
           <p className="text-dark-300 text-lg max-w-2xl mx-auto">
-            Punya proyek? Mari diskusikan bagaimana saya dapat membantu mewujudkan ide Anda.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -76,7 +78,7 @@ const Contact: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-2xl font-bold mb-6 text-dark-50">Informasi Kontak</h3>
+            <h3 className="text-2xl font-bold mb-6 text-dark-50">{t('contact.info_title')}</h3>
 
             <div className="space-y-6 mb-8">
               {contactInfo.map((info, index) => {
@@ -105,7 +107,7 @@ const Contact: React.FC = () => {
             </div>
 
             <div>
-              <h4 className="text-lg font-semibold mb-4 text-dark-50">Ikuti Saya</h4>
+              <h4 className="text-lg font-semibold mb-4 text-dark-50">{t('contact.social_title')}</h4>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
@@ -133,7 +135,7 @@ const Contact: React.FC = () => {
             <form onSubmit={handleSubmit} className="bg-dark-900 rounded-2xl p-8 border border-dark-800">
               <div className="mb-6">
                 <label htmlFor="name" className="block text-dark-200 mb-2 font-medium">
-                  Nama
+                  {t('contact.form_name')}
                 </label>
                 <input
                   type="text"
@@ -143,13 +145,13 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:outline-none focus:border-primary-600 transition-colors"
-                  placeholder="Nama Anda"
+                  placeholder={t('contact.form_name_placeholder')}
                 />
               </div>
 
               <div className="mb-6">
                 <label htmlFor="email" className="block text-dark-200 mb-2 font-medium">
-                  Email
+                  {t('contact.form_email')}
                 </label>
                 <input
                   type="email"
@@ -159,13 +161,13 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:outline-none focus:border-primary-600 transition-colors"
-                  placeholder="email.anda@contoh.com"
+                  placeholder={t('contact.form_email_placeholder')}
                 />
               </div>
 
               <div className="mb-6">
                 <label htmlFor="message" className="block text-dark-200 mb-2 font-medium">
-                  Pesan
+                  {t('contact.form_message')}
                 </label>
                 <textarea
                   id="message"
@@ -175,7 +177,7 @@ const Contact: React.FC = () => {
                   required
                   rows={5}
                   className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg text-dark-100 focus:outline-none focus:border-primary-600 transition-colors resize-none"
-                  placeholder="Ceritakan tentang proyek Anda..."
+                  placeholder={t('contact.form_message_placeholder')}
                 ></textarea>
               </div>
 
@@ -184,7 +186,7 @@ const Contact: React.FC = () => {
                 className="w-full py-4 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-primary-600/50 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 <Send size={20} />
-                Kirim Pesan
+                {t('contact.form_button')}
               </button>
             </form>
           </motion.div>

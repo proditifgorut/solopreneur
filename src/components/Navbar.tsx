@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,62 +21,82 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navItems = [
-    { label: 'Tentang', href: '#about' },
-    { label: 'Layanan', href: '#services' },
-    { label: 'Harga', href: '#pricing' },
-    { label: 'Portofolio', href: '#portfolio' },
-    { label: 'Kontak', href: '#contact' },
+    { label: t('navbar.about'), href: '#about' },
+    { label: t('navbar.services'), href: '#services' },
+    { label: t('navbar.pricing'), href: '#pricing' },
+    { label: t('navbar.portfolio'), href: '#portfolio' },
+    { label: t('navbar.contact'), href: '#contact' },
   ];
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
+  
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        navigate('/');
+    }
+  }
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-dark-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled || isOpen ? 'bg-dark-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <motion.a
-            href="#home"
-            onClick={(e) => handleClick(e, '#home')}
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="text-2xl font-bold text-gradient cursor-pointer"
+            onClick={handleLogoClick}
           >
             Hardirstm
-          </motion.a>
+          </motion.div>
 
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
-              <motion.a
+              <motion.button
                 key={item.href}
-                href={item.href}
-                onClick={(e) => handleClick(e, item.href)}
+                onClick={() => handleNavClick(item.href)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="text-dark-200 hover:text-primary-400 transition-colors duration-200"
+                className="text-dark-200 hover:text-primary-400 transition-colors duration-200 bg-transparent border-none cursor-pointer"
               >
                 {item.label}
-              </motion.a>
+              </motion.button>
             ))}
+            <LanguageSwitcher />
           </div>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-dark-200 hover:text-primary-400"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center gap-4">
+             <LanguageSwitcher />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-dark-200 hover:text-primary-400"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -84,14 +110,13 @@ const Navbar: React.FC = () => {
           >
             <div className="px-4 py-4 space-y-3">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.href}
-                  href={item.href}
-                  onClick={(e) => handleClick(e, item.href)}
-                  className="block text-dark-200 hover:text-primary-400 transition-colors duration-200"
+                  onClick={() => handleNavClick(item.href)}
+                  className="block w-full text-left text-dark-200 hover:text-primary-400 transition-colors duration-200 bg-transparent border-none p-2"
                 >
                   {item.label}
-                </a>
+                </button>
               ))}
             </div>
           </motion.div>

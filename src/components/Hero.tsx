@@ -1,14 +1,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
+
   const handleClick = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const stats = [
+    { number: '50+', label: t('hero.stat_projects') },
+    { number: '30+', label: t('hero.stat_clients') },
+    { number: '5+', label: t('hero.stat_experience') },
+    { number: '100%', label: t('hero.stat_satisfaction') },
+  ];
 
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-dark-950 overflow-hidden">
@@ -24,9 +34,9 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight"
             >
-              Solusi Perangkat Lunak Cerdas
+              {t('hero.title_part1')}
               <br />
-              <span className="text-gradient">untuk Semua Skala Bisnis</span>
+              <span className="text-gradient">{t('hero.title_part2')}</span>
             </motion.h1>
 
             <motion.p
@@ -35,7 +45,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg sm:text-xl text-dark-300 mb-10 max-w-xl mx-auto lg:mx-0"
             >
-              Saya membantu UMKM, startup, dan perusahaan membangun sistem digital yang efisien dan scalable.
+              {t('hero.subtitle')}
             </motion.p>
 
             <motion.div
@@ -48,14 +58,14 @@ const Hero: React.FC = () => {
                 onClick={() => handleClick('#contact')}
                 className="group px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-primary-600/50"
               >
-                Konsultasi Gratis
+                {t('hero.cta_consultation')}
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
               </button>
               <button
                 onClick={() => handleClick('#portfolio')}
                 className="px-8 py-4 bg-dark-800 hover:bg-dark-700 text-white rounded-lg font-semibold transition-all duration-300 border border-dark-700 hover:border-primary-600"
               >
-                Lihat Portofolio
+                {t('hero.cta_portfolio')}
               </button>
             </motion.div>
           </div>
@@ -80,12 +90,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 1, delay: 1 }}
           className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
         >
-          {[
-            { number: '50+', label: 'Projek Selesai' },
-            { number: '30+', label: 'Klien Puas' },
-            { number: '5+', label: 'Tahun Pengalaman' },
-            { number: '100%', label: 'Kepuasan Klien' },
-          ].map((stat, index) => (
+          {stats.map((stat, index) => (
             <div key={index} className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-gradient mb-2">{stat.number}</div>
               <div className="text-dark-400 text-sm">{stat.label}</div>

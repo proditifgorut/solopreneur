@@ -1,48 +1,51 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Star, Quote } from 'lucide-react';
 
 const Testimonials: React.FC = () => {
+  const { t } = useTranslation();
+
   const testimonials = [
     {
       name: 'Budi Santoso',
       role: 'Pemilik, Toko Berkah',
-      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=BS',
+      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=BS',
       rating: 5,
       text: 'Aplikasi web yang dibuat sangat membantu usaha UMKM saya. Proses pemesanan jadi lebih mudah dan penjualan meningkat 40%. Sangat direkomendasikan!',
     },
     {
       name: 'Sarah Williams',
       role: 'CEO, TechStart Inc.',
-      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=SW',
+      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=SW',
       rating: 5,
       text: 'Profesional, cepat, dan memberikan hasil persis seperti yang kami butuhkan. Aplikasi mobile berfungsi sempurna dan pengguna kami menyukainya.',
     },
     {
       name: 'Ahmad Rahman',
       role: 'Pendiri, EdukasiBelajar',
-      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=AR',
+      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=AR',
       rating: 5,
       text: 'Platform e-learning yang dibangun sangat ramah pengguna dan stabil. Dukungan pasca-pengembangan juga sangat baik. Terima kasih!',
     },
     {
       name: 'Jennifer Lee',
       role: 'Direktur Pemasaran, RetailCo',
-      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=JL',
+      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=JL',
       rating: 5,
       text: 'Sistem CRM telah mengubah cara kami mengelola hubungan pelanggan. Kode yang bersih, dokumentasi yang sangat baik, dan dukungan berkelanjutan yang fantastis.',
     },
     {
       name: 'Dian Pratiwi',
       role: 'Pemilik, Warung Makan Sedap',
-      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=DP',
+      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=DP',
       rating: 5,
       text: 'Dengan paket UMKM, saya bisa punya website profesional dengan harga terjangkau. Sekarang pelanggan bisa lihat menu dan pesan online. Mantap!',
     },
     {
       name: 'Michael Chen',
       role: 'CTO, DataAnalytics Pro',
-      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=MC',
+      avatar: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/100x100/1e3a8a/ffffff?text=MC',
       rating: 5,
       text: 'Pengembangan tingkat ahli dengan perhatian terhadap detail. Dasbor analitiknya persis seperti yang kami butuhkan. Menantikan kolaborasi di masa depan.',
     },
@@ -59,11 +62,11 @@ const Testimonials: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Testimoni <span className="text-gradient">Klien</span>
+            {t('testimonials.title_part1')} <span className="text-gradient">{t('testimonials.title_part2')}</span>
           </h2>
           <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
           <p className="text-dark-300 text-lg max-w-2xl mx-auto">
-            Apa kata klien saya tentang bekerja sama dengan saya.
+            {t('testimonials.subtitle')}
           </p>
         </motion.div>
 

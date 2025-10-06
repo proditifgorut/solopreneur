@@ -1,33 +1,36 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Globe, Smartphone, Link2, Brain, Box } from 'lucide-react';
 
 const Services: React.FC = () => {
+  const { t } = useTranslation();
+
   const services = [
     {
       icon: Globe,
-      title: 'Pembuatan Aplikasi Web',
-      description: 'Aplikasi web kustom yang dibangun dengan teknologi modern seperti React dan Node.js untuk performa dan skalabilitas optimal.',
+      title: t('services.web_app_title'),
+      description: t('services.web_app_desc'),
     },
     {
       icon: Smartphone,
-      title: 'Aplikasi Mobile',
-      description: 'Aplikasi mobile lintas platform menggunakan Flutter yang berfungsi mulus di iOS dan Android, memberikan performa seperti aplikasi native.',
+      title: t('services.mobile_app_title'),
+      description: t('services.mobile_app_desc'),
     },
     {
       icon: Link2,
-      title: 'Integrasi API & Otomatisasi',
-      description: 'Sederhanakan proses bisnis Anda dengan integrasi API kustom dan solusi otomatisasi alur kerja.',
+      title: t('services.api_title'),
+      description: t('services.api_desc'),
     },
     {
       icon: Brain,
-      title: 'Solusi AI & Analisis Data',
-      description: 'Manfaatkan kecerdasan buatan dan analisis data untuk mendapatkan wawasan dan membuat keputusan berbasis data untuk bisnis Anda.',
+      title: t('services.ai_title'),
+      description: t('services.ai_desc'),
     },
     {
       icon: Box,
-      title: 'Konsultasi Arsitektur Sistem',
-      description: 'Panduan ahli dalam merancang arsitektur sistem yang skalabel, aman, dan mudah dipelihara untuk proyek Anda.',
+      title: t('services.architecture_title'),
+      description: t('services.architecture_desc'),
     },
   ];
 
@@ -42,11 +45,11 @@ const Services: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <span className="text-gradient">Layanan</span> Saya
+            <span className="text-gradient">{t('services.title_part1')}</span> {t('services.title_part2')}
           </h2>
           <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
           <p className="text-dark-300 text-lg max-w-2xl mx-auto">
-            Layanan pengembangan perangkat lunak komprehensif yang disesuaikan dengan kebutuhan bisnis Anda.
+            {t('services.subtitle')}
           </p>
         </motion.div>
 

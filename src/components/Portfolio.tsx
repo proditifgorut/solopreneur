@@ -1,50 +1,53 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { ExternalLink, Github } from 'lucide-react';
 
 const Portfolio: React.FC = () => {
+  const { t } = useTranslation();
+
   const projects = [
     {
       title: 'Platform E-Commerce',
       description: 'Solusi e-commerce lengkap dengan manajemen inventaris, integrasi pembayaran, dan dasbor admin.',
-      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=E-Commerce',
+      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=E-Commerce',
       tech: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
-      category: 'Aplikasi Web',
+      category: t('portfolio.cat_web'),
     },
     {
       title: 'Aplikasi Pesan Antar Makanan',
       description: 'Aplikasi mobile untuk layanan pesan antar makanan dengan pelacakan real-time dan integrasi pembayaran.',
-      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=Aplikasi+Makanan',
+      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=Aplikasi+Makanan',
       tech: ['Flutter', 'Firebase', 'Google Maps API'],
-      category: 'Aplikasi Mobile',
+      category: t('portfolio.cat_mobile'),
     },
     {
       title: 'Sistem CRM',
       description: 'Sistem manajemen hubungan pelanggan dengan analitik, otomatisasi email, dan pelacakan prospek.',
-      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=Sistem+CRM',
+      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=Sistem+CRM',
       tech: ['React', 'Python', 'Django', 'PostgreSQL'],
-      category: 'Aplikasi Web',
+      category: t('portfolio.cat_web'),
     },
     {
       title: 'Platform AI Chatbot',
       description: 'Platform chatbot cerdas dengan pemrosesan bahasa alami untuk otomatisasi dukungan pelanggan.',
-      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=AI+Chatbot',
+      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=AI+Chatbot',
       tech: ['Python', 'TensorFlow', 'React', 'FastAPI'],
-      category: 'Solusi AI',
+      category: t('portfolio.cat_ai'),
     },
     {
       title: 'Aplikasi Manajemen UMKM',
       description: 'Aplikasi sederhana untuk pelacakan inventaris dan penjualan yang dirancang khusus untuk usaha kecil.',
-      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=Aplikasi+UMKM',
+      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=Aplikasi+UMKM',
       tech: ['React', 'Firebase', 'PWA'],
-      category: 'Aplikasi Web',
+      category: t('portfolio.cat_web'),
     },
     {
       title: 'Dasbor Analitik',
       description: 'Dasbor analitik real-time dengan visualisasi data dan fitur pelaporan untuk intelijen bisnis.',
-      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=Dasbor+Analitik',
+      image: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/600x400/1e3a8a/60a5fa?text=Dasbor+Analitik',
       tech: ['React', 'D3.js', 'Node.js', 'MongoDB'],
-      category: 'Analisis Data',
+      category: t('portfolio.cat_data'),
     },
   ];
 
@@ -59,11 +62,11 @@ const Portfolio: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            <span className="text-gradient">Portofolio</span> Unggulan
+            <span className="text-gradient">{t('portfolio.title')}</span>
           </h2>
           <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
           <p className="text-dark-300 text-lg max-w-2xl mx-auto">
-            Beberapa proyek terbaru saya di berbagai industri dan teknologi.
+            {t('portfolio.subtitle')}
           </p>
         </motion.div>
 
@@ -108,11 +111,11 @@ const Portfolio: React.FC = () => {
                 <div className="flex gap-3">
                   <button className="flex items-center gap-2 text-primary-400 hover:text-primary-300 text-sm font-semibold transition-colors">
                     <ExternalLink size={16} />
-                    Lihat Live
+                    {t('portfolio.live_button')}
                   </button>
                   <button className="flex items-center gap-2 text-dark-400 hover:text-dark-200 text-sm font-semibold transition-colors">
                     <Github size={16} />
-                    Kode
+                    {t('portfolio.code_button')}
                   </button>
                 </div>
               </div>

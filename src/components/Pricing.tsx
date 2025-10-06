@@ -1,70 +1,78 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Check, Sparkles, Rocket, Building, Store } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Pricing: React.FC = () => {
+  const { t } = useTranslation();
+
   const plans = [
     {
       icon: Store,
-      name: 'Paket UMKM',
+      name: t('pricing.umkm_name'),
       price: 'Rp 2 – 5',
       unit: 'juta',
-      description: 'Untuk usaha kecil yang ingin memiliki website profesional sederhana.',
+      description: t('pricing.umkm_desc'),
       features: [
-        '1–3 halaman website',
-        'Desain responsif',
-        'Formulir kontak',
-        'Panduan update konten',
+        t('pricing.umkm_f1'),
+        t('pricing.umkm_f2'),
+        t('pricing.umkm_f3'),
+        t('pricing.umkm_f4'),
       ],
       color: 'from-green-600 to-emerald-600',
       popular: false,
     },
     {
       icon: Sparkles,
-      name: 'Starter',
+      name: t('pricing.starter_name'),
       price: 'Rp 7 – 10',
       unit: 'juta',
-      description: 'Untuk bisnis atau startup tahap awal.',
+      description: t('pricing.starter_desc'),
       features: [
-        'Landing page profesional',
-        'SEO dasar',
-        'Setup hosting',
-        'Integrasi analitik',
+        t('pricing.starter_f1'),
+        t('pricing.starter_f2'),
+        t('pricing.starter_f3'),
+        t('pricing.starter_f4'),
       ],
       color: 'from-blue-600 to-cyan-600',
       popular: false,
     },
     {
       icon: Rocket,
-      name: 'Professional',
+      name: t('pricing.pro_name'),
       price: 'Rp 12 – 20',
       unit: 'juta',
-      description: 'Untuk aplikasi web dinamis dengan backend dan basis data.',
+      description: t('pricing.pro_desc'),
       features: [
-        'Integrasi API',
-        'Dashboard admin',
-        'Keamanan dasar',
-        'Dukungan 3 bulan',
+        t('pricing.pro_f1'),
+        t('pricing.pro_f2'),
+        t('pricing.pro_f3'),
+        t('pricing.pro_f4'),
       ],
       color: 'from-primary-600 to-purple-600',
       popular: true,
     },
     {
       icon: Building,
-      name: 'Enterprise',
+      name: t('pricing.enterprise_name'),
       price: 'Rp 30+',
       unit: 'juta',
-      description: 'Untuk sistem besar atau SaaS.',
+      description: t('pricing.enterprise_desc'),
       features: [
-        'Pengembangan penuh',
-        'Keamanan lanjutan',
-        'Support & maintenance',
-        'Prioritas update',
+        t('pricing.enterprise_f1'),
+        t('pricing.enterprise_f2'),
+        t('pricing.enterprise_f3'),
+        t('pricing.enterprise_f4'),
       ],
       color: 'from-purple-600 to-pink-600',
       popular: false,
     },
   ];
+
+  const handleClick = (href: string) => {
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section id="pricing" className="py-20 bg-dark-900">
@@ -77,11 +85,11 @@ const Pricing: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Paket <span className="text-gradient">Harga</span>
+            {t('pricing.title_part1')} <span className="text-gradient">{t('pricing.title_part2')}</span>
           </h2>
           <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
           <p className="text-dark-300 text-lg max-w-2xl mx-auto">
-            Pilih paket yang sesuai dengan kebutuhan dan anggaran bisnis Anda.
+            {t('pricing.subtitle')}
           </p>
         </motion.div>
 
@@ -97,17 +105,17 @@ const Pricing: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className={`relative bg-dark-800 rounded-2xl p-8 border ${
                   plan.popular ? 'border-primary-600 shadow-xl shadow-primary-600/20' : 'border-dark-700'
-                } hover:border-primary-600 transition-all duration-300 hover:scale-105`}
+                } flex flex-col hover:border-primary-600 transition-all duration-300 hover:scale-105`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                     <div className="bg-gradient-to-r from-primary-600 to-purple-600 text-white text-xs font-bold px-4 py-1 rounded-full">
-                      PALING POPULER
+                      {t('pricing.popular')}
                     </div>
                   </div>
                 )}
 
-                <div className={`inline-block p-3 bg-gradient-to-r ${plan.color} rounded-xl mb-6`}>
+                <div className={`inline-block p-3 bg-gradient-to-r ${plan.color} rounded-xl mb-6 self-start`}>
                   <Icon className="text-white" size={28} />
                 </div>
 
@@ -121,7 +129,7 @@ const Pricing: React.FC = () => {
                   </div>
                 </div>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 flex-grow">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-dark-300 text-sm">
                       <Check className="text-primary-400 flex-shrink-0 mt-0.5" size={18} />
@@ -130,15 +138,16 @@ const Pricing: React.FC = () => {
                   ))}
                 </ul>
 
-                <button
-                  className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
+                <Link
+                  to={`/penawaran?paket=${encodeURIComponent(plan.name)}`}
+                  className={`block text-center w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
                     plan.popular
                       ? 'bg-gradient-to-r from-primary-600 to-purple-600 text-white hover:shadow-lg hover:shadow-primary-600/50'
                       : 'bg-dark-700 text-dark-100 hover:bg-dark-600'
                   }`}
                 >
-                  Mulai
-                </button>
+                  {t('pricing.button')}
+                </Link>
               </motion.div>
             );
           })}
@@ -152,7 +161,11 @@ const Pricing: React.FC = () => {
           className="mt-12 text-center bg-dark-800 border border-dark-700 rounded-xl p-6"
         >
           <p className="text-dark-300">
-            Butuh solusi khusus? <a href="#contact" className="text-primary-400 hover:text-primary-300 font-semibold">Hubungi saya</a> untuk penawaran personal.
+            {t('pricing.custom_solution_text')}
+            <button onClick={() => handleClick('#contact')} className="text-primary-400 hover:text-primary-300 font-semibold bg-transparent border-none cursor-pointer">
+              {t('pricing.custom_solution_link')}
+            </button>
+            {t('pricing.custom_solution_text2')}
           </p>
         </motion.div>
       </div>
